@@ -1,10 +1,26 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+.videoOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,.5);
+}
+.video-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -35,4 +51,105 @@
   to {
     transform: rotate(360deg);
   }
+}
+body {
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+text-transform: uppercase;
+}
+
+#wrapper {
+width: 710px;
+margin: 0 auto;
+}
+
+header, article {
+font-weight: 800;
+color: #000;
+}
+
+header {
+margin-top: 70px;
+}
+
+header h1 {
+font-size: 60px;
+line-height: 60px;
+display: none;
+}
+
+#output {
+font-size: 48px;
+line-height: 48px;
+margin: 60px 0;
+min-height: 250px;
+}
+
+noscript {
+font-weight: 800;
+font-size: 48px;
+line-height: 48px;
+margin: 60px 0;
+}
+
+#output dd {
+display: block;
+margin: 60px 0;
+}
+
+#generate {
+text-decoration: none;
+/* text-align: center; */
+font-size: 34px;
+color: #000;
+cursor: pointer;
+transition: 1s;
+}
+
+#generate:hover {
+  opacity: .2
+}
+
+#generate:hover {
+text-decoration: underline;
+color: black;
+}
+
+aside {
+position: absolute;
+margin: 12px 8px;
+right: 0;
+top: 0;
+}
+
+#share li {
+list-style: none;
+display: inline;
+}
+
+#share-facebook {}
+#share-twitter {position: relative; top: -1px;}
+.twitter-share-button {
+font-size: 11px;	
+color: #000;
+}
+
+footer {
+text-transform: none;
+position: absolute;
+text-align: right;
+line-height: 16px;
+font-size: 12px;
+color: #666;
+margin: 12px 24px;
+bottom: 0;
+right: 0;
+}
+
+footer a {
+text-decoration: none;
+color: #000;
+}
+
+footer a:hover {
+text-decoration: underline;
 }
