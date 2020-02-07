@@ -25,7 +25,7 @@ var templates = [
   
   var phrases = [
     "The date is 2024. Imagine",
-    "In 10 years, you'll see",
+    "In 40 years, you'll see",
     "This is your future:"
   ];
   
