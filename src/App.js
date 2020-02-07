@@ -18,7 +18,7 @@ const base = new Airtable({apiKey: 'keyxTmjEcWluvy82P'}).base('appaFvaUcm0byQs3Q
 var vidPaths = [video1, video2, video3, video4, video5, video6, video7, video8, video9];
 
 var templates = [
-  "@who in a world changed by @context, @verb with a @adjective @noun.",
+  "@who in a world changed by @context, @verb with @adjective @noun.",
   "@who are dealing with @context, @verb through @adjective @noun."
   
   ];
@@ -265,7 +265,7 @@ setTimeout(() => {this.setState({
           <div id="output">
       {this.state.future}
           </div>
-    {!this.state.loading && <div onClick={this.generateIdea} id="generate" href="#" title="Hit me again!">Tell me more about the future.</div> }
+    {!this.state.loading && <div onClick={this.generateIdea} id="generate" href="#" title="Hit me again!">Create a new future.</div> }
         </article>
 
 
