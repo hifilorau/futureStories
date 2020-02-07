@@ -5,7 +5,7 @@ import Airtable from 'airtable'
 
 // import video5 from
 const video1 = 'https://wrau.s3-us-west-2.amazonaws.com/dark-sun.mp4';
-const video2 = 'https://wrau.s3-us-west-2.amazonaws.com/fire-sun.mp4.mp4';
+const video2 = 'https://wrau.s3-us-west-2.amazonaws.com/fire-sun.mp4';
 const video3 = 'https://wrau.s3-us-west-2.amazonaws.com/lines.mp4';
 const video4 = 'https://wrau.s3-us-west-2.amazonaws.com/water-light.mp4';
 const video5 = 'https://wrau.s3-us-west-2.amazonaws.com/mall.mp4';
@@ -59,21 +59,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      corpus: {}
+      corpus: {},
+      loading: true
     }
   }
  
-
- update = () => {
-
-	// this.generateIdea();
-	// // dom.output.hide();
-	// // dom.output.fadeIn(500);
-	
-	// this.setGenerateLabel();
-}
-
-// build regex from corpus
 
 generateRegExp = () => {
  console.log('REGEXING')
@@ -100,8 +90,8 @@ generateIdea = () => {
 	var intro;
 	var output;
 	
-	var template = templates[(Math.random() * templates.length) | 0];
-	var data = this.state.corpus;
+	let template = templates[(Math.random() * templates.length) | 0];
+	const data = this.state.corpus;
 
   const vidPath =  vidPaths[Math.floor(Math.random() * vidPaths.length)];
 	for(var prop in this.state.corpus) {
@@ -112,7 +102,9 @@ generateIdea = () => {
 		type = result[1];
 		match = result[0];
     index = (Math.random() * data[type].length) | 0;
+    console.log('corpus', this.state.corpus)
     template = template.replace(match, data[type].splice(index, 1)[0]);
+    console.log('corpus new', this.state.originalCorpus)
 		regex.lastIndex = 0;
 		result = regex.exec(template);
 	}
@@ -123,9 +115,10 @@ generateIdea = () => {
 	console.log('output', output);
   this.setState({
     vidPath: vidPath,
+    loading: false,
     future: this.correctGrammar(output),
     corpus: this.state.originalCorpus
-  })
+  }, () => {this.getTerms()})
 }
 
 getWhoTable = () => {
@@ -232,32 +225,31 @@ setGenerateLabel = () => {
 	// dom.generate.text(label);
 	
 }
+
+getTerms = () => {
+  let corpus = {}
+  corpus.context = this.getContextTable()
+  corpus.who = this.getWhoTable();
+  corpus.noun =  this.getNounTable();
+  corpus.adjective = this.getAdjTable();
+  corpus.verb = this.getVerbTable()
+
+  // regex = this.generateRegExp();
+setTimeout(() => {this.setState({
+  corpus: corpus,
+  originalCorpus: corpus,
+  loading: false
+ }, () => {regex = this.generateRegExp();})}, 2000)
+}
   
-  componentDidMount = async () => {
-    // console.log(corpus) 
-    let corpus = {}
-    corpus.context = this.getContextTable()
+  componentDidMount = () => {
+    console.log('componentDidMount') 
+    this.getTerms();
 
-    console.log('yo', corpus.context)
-    corpus.who = this.getWhoTable();
-    corpus.noun =  this.getNounTable();
-    corpus.adjective = this.getAdjTable();
-    corpus.verb = this.getVerbTable()
-    console.log('new corpus', corpus.who)
 
-    // regex = this.generateRegExp();
-  setTimeout(() => {this.setState({
-    corpus: corpus,
-    originalCorpus: corpus,
-    loading: true
-   }, () => {regex = this.generateRegExp();})}, 2000)
-  //  this.setState({
-  //   corpus: corpus
-  //  })
   }
 
   render() {
-    console.log(this.state.corpus)
     return (
       <div className="App">
         {this.state.vidPath && <div className="video-wrapper">
@@ -273,7 +265,7 @@ setGenerateLabel = () => {
           <div id="output">
       {this.state.future}
           </div>
-    {this.state.loading && <div onClick={this.generateIdea} id="generate" href="#" title="Hit me again!">Tell me more about the future.</div> }
+    {!this.state.loading && <div onClick={this.generateIdea} id="generate" href="#" title="Hit me again!">Tell me more about the future.</div> }
         </article>
 
 
