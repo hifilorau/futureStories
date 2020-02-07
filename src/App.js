@@ -18,13 +18,13 @@ const base = new Airtable({apiKey: 'keyxTmjEcWluvy82P'}).base('appaFvaUcm0byQs3Q
 var vidPaths = [video1, video2, video3, video4, video5, video6, video7, video8, video9];
 
 var templates = [
-  "@who in a world changed by @context, @verb with @adjective @noun.",
-  "@who are dealing with @context, @verb through @adjective @noun."
+  "@who in a world changed by @context. People are @verb with @adjective @noun.",
+  "@who are dealing with @context, we are @verb through @adjective @noun."
   
   ];
   
   var phrases = [
-    "The date is 2024. Imagine",
+    "The date is 2060. Imagine",
     "In 40 years, you'll see",
     "This is your future:"
   ];
