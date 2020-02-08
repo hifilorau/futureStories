@@ -256,26 +256,23 @@ setTimeout(() => {this.setState({
           <div className="videoOverlay"></div>
           <video src={this.state.vidPath} autoPlay loop muted/>
        </div> }
-    		<div id="wrapper">
-        <header>
-          <h1>{this.state.finalAnswer}</h1>
-        </header>
+    
 
-        <article>
+        <div className="content-wrapper">
           <div id="output">
-      {this.state.future}
+            {this.state.future}
           </div>
-    {!this.state.loading && <div onClick={this.generateIdea} id="generate" href="#" title="Hit me again!">Create a new future.</div> }
-        </article>
+         {!this.state.loading && <div onClick={this.generateIdea} id="generate" href="#" title="Hit me again!">Create a new future.</div> }
+        </div>
 
 
 
         <footer>
           {/* <p><a href="http://www.iftf.org">Institute for the Future</a></p> */}
-          <p>Inspired by soulwire's <a href="https://github.com/soulwire/WTFEngine">WTFEngine</a></p>
+          <p>Inspired by Soulwire's What's the Future Engine</p>
         </footer>
 
-        </div>
+   
               </div>
             );
           }
